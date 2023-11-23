@@ -1,0 +1,198 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <title>U8</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/> 
+    <style>
+        body {
+            background-color:  #333333;
+            margin:30px;
+            color: white;
+        }
+        table {
+        color: white;
+    	}
+
+    	td {
+        color: white;
+    	}
+    	
+    	th {
+    	color:#1a1400 ;
+    	background-color: white
+    	}
+    	h1{
+    	background-color: #ffcc00; 
+    	color: #1a1400; 
+    	padding: 30px; 
+    	border-radius: 10px; 
+    	margin-bottom: 30px;
+    	}
+    	
+    	h2{
+    	color:#ffcc00;
+    	border-bottom: 1px dotted #ffcc00;
+    	}
+    	h5{
+    	color:#ffcc00;
+    	}
+    </style>
+</head>
+<body>
+	<div style="display: flex; justify-content: space-between; align-items: center;">
+	    <h1 th:text="'Welcome to the ' + ${teamName} + ' team'"></h1>
+	    <div class="col-md-4">
+        	<p>Welcome <b sec:authentication="name"></b>,
+           		Your role is <b sec:authentication="principal.authorities"></b>
+           	</p>
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+            </form>
+       </div>
+	</div>
+	
+	<div class="player-table">
+		<div>
+		   	<h2 th:text="|${teamName} 's players|"></h2>
+		    <br>
+		    <a sec:authorize="hasAuthority('TEAM_MANAGEMENT')" th:href="@{'/addplayer?team='+ ${teamName}}" class="btn btn-primary">
+	                   Add New Player
+	        </a>
+		</div>
+		<br>
+    	<table class="table table-bordered table-striped">
+			<tr>
+			    <th>FirstName</th>
+			    <th>LastName</th>
+			    <th>uniform Number</th>
+			    <th>Phone number</th>
+			    <th>Email</th>
+			    <th>Address</th>
+			    <th>Postcode</th>
+			   	<th></th>
+			   	<th></th>
+			</tr>  
+	    	<tr th:each = "member :${members}" th:if="${member.role == 'player'}">
+	    		<td th:text="${member.firstName}"></td>
+	    		<td th:text="${member.lastName}"></td>
+	    		<td th:text ="${member.playerNumber}"></td>
+	    		<td th:text="${member.phone}"></td>  
+	    		<td th:text ="${member.email}"></td>
+	    		<td th:text ="${member.address}"></td>
+	    		<td th:text ="${member.postcode}"></td>
+	    		<td>
+    				<a sec:authorize="hasAuthority('TEAM_MANAGEMENT')" class="btn btn-danger" th:href="@{'/delete/' + ${member.id} + '?team=' + ${teamName} + '&entityType=player'}">Delete</a>
+				</td>
+
+    			<td>
+    		    	<a sec:authorize="hasAuthority('TEAM_MANAGEMENT')" class="btn btn-primary"th:href="@{'/edit/' + ${member.id} + '?team=' + ${teamName} + '&entityType=player'}">Edit</a>
+    			</td>	
+	    	</tr> 	
+     	</table>
+   </div>
+   <br>
+   
+   <div class = "team-management-table">	
+	     <div> 
+		     <h2 th:text="|${teamName} 's team management members|"></h2>
+		     <br>
+		     <a sec:authorize="hasAuthority('TEAM_MANAGEMENT')" th:href="@{'/addmember?team='+ ${teamName}}" class="btn btn-primary" >
+	            Add new team management member
+	         </a>
+       	</div>
+       	<br>
+	     <table class="table table-bordered table-striped">
+			<tr>
+			    <th>FirstName</th>
+			    <th>LastName</th>
+			    <th>Phone number</th>
+			    <th>Email</th>
+			    <th>Role</th>
+			   	<th></th>
+			   	<th></th>
+			   
+			</tr>  
+	    	<tr th:each = "member :${members}" th:if="${member.role != 'player'}">
+	    		<td th:text="${member.firstName}"></td>
+	    		<td th:text="${member.lastName}"></td>
+	    		<td th:text="${member.phone}"></td>  
+	    		<td th:text ="${member.email}"></td>
+	    		<td th:text ="${member.role}"></td>
+	    		<td>
+    				<a sec:authorize="hasAuthority('TEAM_MANAGEMENT')" class="btn btn-danger" th:href="@{'/delete/' + ${member.id} + '?team=' + ${teamName} + '&entityType=member'}">Delete</a>
+				</td>
+    			<td>
+    		    	<a sec:authorize="hasAuthority('TEAM_MANAGEMENT')" class="btn btn-primary"th:href="@{'/edit/' + ${member.id} + '?team=' + ${teamName}+'&entityType=member'}">Edit</a>
+    			</td>
+	    	</tr>
+	     </table>
+	  </div>
+	  <br>	
+	  <div>
+	  	<h2 th:text="|${teamName} 's activities|"></h2>
+	  	<br>
+	    <a sec:authorize="hasAuthority('TEAM_MANAGEMENT')" th:href="@{'/addActivity?team='+ ${teamName}}" class="btn btn-primary" >
+           Add new activity
+        </a>
+        <a sec:authorize="hasAuthority('TEAM_MANAGEMENT')" class="btn btn-danger" th:href="@{'/deletePastActivities?team=' + ${teamName}}">Delete Past Activities</a>
+        <p></p>
+	    <h5> Training sessions</h5>
+	    <br>
+		<table class="table table-bordered table-striped" id = "training-table">
+				<tr>
+				    <th style="width: 200px;">Date</th>
+					<th style="width: 150px;">Begin</th>
+					<th style="width: 150px;">Finish</th>
+					<th style="width: 300px;">Arena</th>
+					<th style="width: 800px;">Extra info</th>
+					<th></th>
+					<th></th>
+				   	   
+				</tr>  
+		    	<tr th:each = "activity :${activities}" th:if="${activity.activityType == 'training'} ">
+		    		<td th:text="${#temporals.format(activity.beginTime, 'dd/MM/yyyy')}"></td>
+		            <td th:text="${#temporals.format(activity.beginTime, 'HH:mm')}"></td>
+		            <td th:text="${#temporals.format(activity.finishTime, 'HH:mm')}"></td>
+		    		<td th:text ="${activity.arena}"></td>
+		    		<td th:text ="${activity.extraInfo}"></td>
+		    		<td>
+    		    	<a sec:authorize="hasAuthority('TEAM_MANAGEMENT')" class="btn btn-danger" th:href="@{'/delete/' + ${activity.id} + '?team=' + ${teamName} + '&entityType=activity'}">Delete</a>
+    				</td>
+    				<td>
+    		    	<a sec:authorize="hasAuthority('TEAM_MANAGEMENT')" class="btn btn-primary"th:href="@{'/edit/' + ${activity.id} + '?team=' + ${teamName}+ '&entityType=activity'}">Edit</a>
+    			</td>
+		    	</tr>
+		</table>
+		<br>	
+     	<h5> Upcoming games </h5>
+     	<br>
+     	<table class="table table-bordered table-striped" id = "game-table">
+				<tr>
+				    <th style="width: 200px;">Date</th>
+					<th style="width: 150px;">Begin</th>
+					<th style="width: 150px;">Finish</th>
+					<th style="width: 300px;">Arena</th>
+					<th style="width: 800px;">Extra info</th>
+				   	<th></th>
+					<th></th>  
+				</tr>  
+		    	<tr th:each = "activity :${activities}" th:if="${activity.activityType == 'game'} ">
+		    		<td th:text="${#temporals.format(activity.beginTime, 'dd/MM/yyyy')}"></td>
+		            <td th:text="${#temporals.format(activity.beginTime, 'HH:mm')}"></td>
+		            <td th:text="${#temporals.format(activity.finishTime, 'HH:mm')}"></td>
+		    		<td th:text ="${activity.arena}"></td>
+		    		<td th:text ="${activity.extraInfo}"></td>
+		    		<td>
+    		    	<a sec:authorize="hasAuthority('TEAM_MANAGEMENT')" class="btn btn-danger" th:href="@{'/delete/' + ${activity.id} + '?team=' + ${teamName} + '&entityType=activity'}">Delete</a>
+    				</td>
+		    		<td>
+    		    	<a sec:authorize="hasAuthority('TEAM_MANAGEMENT')" class="btn btn-primary"th:href="@{'/edit/' + ${activity.id} + '?team=' + ${teamName}+ '&entityType=activity'}">Edit</a>
+    				</td>
+		    	</tr>
+		     </table> 	
+     </div>
+
+</body>
+</html>

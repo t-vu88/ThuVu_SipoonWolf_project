@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head>
+    <title>Add new team management member</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <style>
+        body {
+            background-color:  #333333;
+            margin:20px;
+            color: white;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container mt-3">
+     <h1 class="mt-3" style="background-color: #ffcc00; color: #1a1400; padding: 30px; border-radius: 10px; margin-bottom: 30px;">
+     	Add new team management member
+     </h1>
+    
+        <form th:object="${newMember}" th:action="@{/save}" action="#" method="post">
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label for="firstName">First name:</label>
+                    <input type="text" id="firstName" class="form-control" th:field="*{firstName}" />
+                </div>
+                <div class="col-md-6 form-group">
+                    <label for="lastName">Last name:</label>
+                    <input type="text" id="lastName" class="form-control" th:field="*{lastName}" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label for="email">Email:</label>
+                    <input type="text" class="form-control" th:field="*{email}" />
+                </div>
+                <div class="col-md-6 form-group">
+                    <label for="phone">Phone number:</label>
+                    <input type="text" class="form-control" th:field="*{phone}" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="role">Role:</label>
+                <select th:field="*{role}" class="form-control">
+                    <option value="Team leader">Team leader</option>
+                    <option value="Coach">Coach</option>
+                    <option value="Team official">Team official</option>
+                </select>
+            </div>
+            <div class ="row">
+	           	<div class="col-md-6 form-group">
+					<label for="team">Team:</label>
+					    <input type="text" id="teamName" class="form-control" 
+					           th:field="*{team.name}" readonly="readonly">
+					    <input type="hidden" id="teamId" th:field="*{team.teamId}">
+				</div>
+			</div>
+            <input type="submit" class="btn btn-primary" value="Save" />
+        </form>
+    </div>
+</body>
+
+</html>

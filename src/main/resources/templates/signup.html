@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add student</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
+	<style>
+	        body {
+	            display: flex;
+	            align-items: center;
+	            flex-direction: column;
+	            background-color:  #333333;
+	            margin:20px;
+	            color: white;
+	        }
+	        h1{
+	    	background-color: #ffcc00; 
+	    	color: #1a1400; 
+	    	padding: 30px; 
+	    	border-radius: 10px; 
+	    	margin-bottom: 30px;
+	    	}
+	 </style>
+</head>
+<body>
+<div class="container">
+	<h1>Please sign up</h1>
+     <div class="col-md-4">
+		<form th:object="${signupform}" th:action="@{/saveuser}" action="#" method="post">
+			<div>
+				<label> Username :<input type="text" th:field="*{username}" class="form-control"/></label>
+				<br><small class="text-muted">Username must be between 5 and 30 characters.</small>
+				<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</p>	
+			</div>
+			<div>
+				<label> Password :<input type="password" th:field="*{password}" class="form-control"/></label>
+				<br><small class="text-muted">Password must be between 7 and 30 characters.</small>
+				<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</p>	
+			</div>
+			<div>
+				<label> Re-type Password: <input type="password" th:field="*{passwordCheck}" class="form-control"/></label>
+				<br><small class="text-muted">Password must be between 7 and 30 characters.</small>
+				<p th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}">Password Match Error</p>	
+			</div>
+			
+			<div>
+			    <label> Email :<input type="text" th:field="*{email}" class="form-control"/></label>
+			    <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</p>
+			</div>
+			<div>
+				<label> Role:
+			        <input type="text" th:field="*{role}" class="form-control" readonly="readonly"/>
+			    </label>
+			</div>
+
+			<div>
+				<label> Team:
+					<select th:field="*{teamName}" class="form-control">
+						<option value="U8">U8</option>
+						<option value="U9">U9</option>
+						<option value="U10">U10</option>
+						<option value="U11">U11</option>
+					</select>
+				</label>
+			</div>
+			
+			<input type="submit" class="btn btn-primary" value="Signup"></input>		
+		</form>
+	</div>
+</div>
+</body>
+</html>

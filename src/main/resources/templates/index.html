@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Sipoon Wolf icehockey club</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/> 
+<style>
+        body {
+            background-color:  #333333;
+            margin:30px 50px;
+            color: white;
+            font-size: 22px
+        }
+        form {
+        	display : inline;
+        	padding : 0px 20px 0px 0px;
+        }
+        button {
+        	background-color : #ffcc00;
+        	padding : 10px 20px;
+        	font-size: 20px; 
+        	border-radius : 10px;
+        	
+        }
+        button:hover{
+        	background-color : #fff2cc ;
+        }
+    </style>
+</head>
+<body >
+	<h1 style="background-color: #ffcc00; color: #1a1400; padding: 30px; border-radius: 10px; margin-bottom: 30px;">Welcome to Sipoo Wolf Icehockey club</h1>
+	<div id = "container">
+		<div id = "introduction">
+			<p>Sipoo Wolf is growing and welcomes both beginner and experienced players to our new and existing ice hockey teams.
+				Every player is important to us.
+			We aim to nurture and guide players towards a healthy lifestyle within our club. Alongside the development of hockey skills, we also consider the development of social skills to be equally important. Through training, we hope that every Wolf player will also learn to respect the game, opponents, referees, and coaches.
+			We want to offer every child and young person the opportunity to engage in hockey, regardless of their age and skill level.
+			</p>
+		
+		</div>
+		<div id = "team-info">
+			<p> Get to know our team</p>
+				<form th:action="@{/u8}"><button type="submit">U8 team (born in 2016-2018)</button></form>
+				<form th:action="@{/u9}"><button type="submit">U9 team ( born in 2015)</button></form>
+				<form th:action="@{/u10}"><button type="submit">U10 team (born in 2014)</button></form>
+				<form th:action="@{/u11}"><button type="submit">U11 team (born in 2013)</button></form>
+		</div>
+	</div>
+</body>
+</html>
+
+

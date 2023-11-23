@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+<title>Sipoon Wolf icehockey club</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/> 
+<style>
+	body {
+		margin : 50px;
+		background-color: #333333;
+		color: white;
+		font-size: 20px
+	}
+	h1{
+		background-color: #ffcc00; 
+		color: #1a1400;
+		padding: 20px 200px 20px 30px; 
+		border-radius: 10px; 
+		margin-bottom: 30px;
+	}
+	.header {
+	    display: flex;
+	    justify-content: space-between;
+	    align-items: center;
+	}
+	button {
+	width: 120px; 
+	height: 50px;
+	}
+</style>
+</head>
+<body>
+	<div class="header">
+	    <h1>
+	        [[${'Welcome to ' + teamName + ' team'}]]
+	    </h1>
+	    <a th:href="@{/}">
+	        <button type="button" class="btn btn-primary">Home</button>
+	    </a>
+	</div>
+	<div th:if="${teamName == 'U8'}">
+		<div id = "container">
+			<div class = " team introduction">
+				<p>The U8 team, which includes girls and boys born in 2016 and later, 
+					practices twice during the week and also has training sessions or plays practice games on weekends.
+					Our training approach ensures that every child, 
+					whether they have been playing for a couple of years or are newcomers to the activity, 
+					can benefit to the maximum from our practices.
+				</p>
+			</div>
+			<div  class = "contact-info">
+				<p>
+				If you are interested in the team, please contact: 
+				<br>Aso Arigh, U8 team leader</p>
+				<ul>
+					<li> mobile : 040-4817830 </li>
+					<li> email: 2016@sipoonwolf.fi</li>
+				</ul>
+				<p>Matti Hirvonen, U8 main coach </p>
+				<ul>
+					<li> mobile : 040-576890 </li>
+					<li> email: 2016@sipoonwolf.fi</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div th:if="${teamName == 'U9'}">
+		<div id = "container">
+			<div class = " team introduction">
+				<p>The U9 team, which includes girls and boys born in 2015,practices three times during the week and also has training sessions or games on weekends. 
+				The team participates in the Finnish Ice Hockey Association's Leijonaliiga, plays practice games, 
+					and takes part in game days and tournaments. There is plenty of ice time available for the team.
+				</p>
+			</div>
+			<div  class = "contact-info">
+				<p>
+				If you are interested in the team, please contact: 
+				<br>Dimitri Belov, U9 team leader</p>
+				<ul>
+					<li> mobile : 040-678912 </li>
+					<li> email: 2015@sipoonwolf.fi</li>
+				</ul>
+				<p>Servei Kogel, U9 main coach </p>
+				<ul>
+					<li> mobile : 044-56789 </li>
+					<li> email: 2015@sipoonwolf.fi</li>
+				</ul>
+			</div>
+		</div>	
+	</div>
+	
+	<div th:if="${teamName == 'U10'}">
+		<div id = "container">
+			<div class = " team introduction">
+				<p>The U10 team, which includes girls and boys born in 2014,practices three times during the week and also has training sessions or games on weekends. 
+					The team participates in the Finnish Ice Hockey Association's Leijonaliiga, plays practice games, 
+					and takes part in game days and tournaments. 
+					Additionally, players have the opportunity to join the club's free skill development sessions.
+				</p>
+			</div>
+			<div  class = "contact-info">
+				<p>
+				If you are interested in the team, please contact: 
+				<br>Ville Muuronen, U10 team leader</p>
+				<ul>
+					<li> mobile : 040-0327684 </li>
+					<li> email: 2014@sipoonwolf.fi</li>
+				</ul>
+				<p>Jarkko Nieminen, U10 main coach </p>
+				<ul>
+					<li> mobile : 044-124356 </li>
+					<li> email: 2014@sipoonwolf.fi</li>
+				</ul>
+			</div>
+		</div>	
+	</div>
+	
+	<div th:if="${teamName == 'U11'}">
+		<div id = "container">
+			<div class = " team introduction">
+				<p>The U11 team, which includes girls and boys born in 2013,practices three times during the week and also has training sessions or games on weekends. 
+					The team participates in the Finnish Ice Hockey Association's Leijonaliiga, plays practice games, 
+					and takes part in game days and tournaments. 
+					Additionally, players have the opportunity to join the club's free skill development sessions.
+				</p>
+			</div>
+			<div  class = "contact-info">
+				<p>
+				If you are interested in the team, please contact: 
+				<br>Miia Podschivalow,  U11 team leader</p>
+				<ul>
+					<li> mobile : 040-0780595 </li>
+					<li> email: 2013@sipoonwolf.fi</li>
+				</ul>
+				<p>	Antti Nuutinen , U11 main coach </p>
+				<ul>
+					<li> mobile : 044-124356 </li>
+					<li> email: 2013@sipoonwolf.fi</li>
+				</ul>
+			</div>
+		</div>	
+	</div>
+	<div class="log-in">
+	
+    More information about team's members, trainings, and upcoming games:
+    <ul>
+        <li style="margin:  20px 0px">
+		    For visitors, please:
+		    <a th:href="@{'/teaminfo?team='+ ${teamName}}">
+		        <button type="button" class="btn btn-primary">Click Here</button>
+		    </a>
+		</li>
+		<li>
+            For player's parents and team management members, please:
+            <a th:href="@{'/login'}">
+                <button type="button" class="btn btn-primary">Sign In</button>
+            </a>
+            <span>Or</span>
+            <a th:href="@{'/signup'}">
+                <button type="button" class="btn btn-primary">Sign Up</button>
+            </a>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>
