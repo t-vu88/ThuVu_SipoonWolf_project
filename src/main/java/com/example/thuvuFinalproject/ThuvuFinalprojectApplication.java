@@ -24,9 +24,9 @@ public class ThuvuFinalprojectApplication {
 	public CommandLineRunner memberDemo(MemberRepository memberRepo, TeamRepository teamRepo,
 			ActivityRepository activityRepo, AppUserRepository userRepo) {
 		return (args) -> {
-			log.info("Resetting the database");
+			/*log.info("Resetting the database");
 
-	        /*Delete data from child tables first
+	        Delete data from child tables first
 	        activityRepo.deleteAll();
 	        memberRepo.deleteAll();
 
@@ -37,12 +37,12 @@ public class ThuvuFinalprojectApplication {
 	        log.info("Database reset complete");*/
 	       
 	        log.info("Save new data for testing");
-	        // add team to the database
-			 /*teamRepo.save(new Team ("U8"));
+	        /* add team to the database
+			 teamRepo.save(new Team ("U8"));
 			 teamRepo.save(new Team ("U9"));
 			 teamRepo.save(new Team ("U10"));
-			 teamRepo.save(new Team ("U11"));*/
-			 
+			 teamRepo.save(new Team ("U11"));
+			 */
 			  
 			 // add team player to the database
 			 
@@ -80,8 +80,8 @@ public class ThuvuFinalprojectApplication {
 			 memberRepo.save(new Member("Jarkko", "Nieminen"," main coach","jarkko@gmail.com","0425678912", teamRepo.findByName("U10").get(0)));
 			 
 			 memberRepo.save(new Member("Miia", "Podschivalow","team leader","miia@gmail.com","0426789123", teamRepo.findByName("U11").get(0)));
-			 memberRepo.save(new Member("Antti", "Nuutinen","main coach","hirvonen@gmail.com","0427891234", teamRepo.findByName("U11").get(0)));*/
-			 
+			 memberRepo.save(new Member("Antti", "Nuutinen","main coach","hirvonen@gmail.com","0427891234", teamRepo.findByName("U11").get(0)));
+			 */
 			 //addd activitiies
 			 
 			 /*activityRepo.save(new Activity("training", "Sipoo jäähalli",LocalDateTime.of(2023,11,17,13,0),LocalDateTime.of(2023,11,10,15,0),teamRepo.findByName("U8").get(0)));
@@ -153,8 +153,8 @@ public class ThuvuFinalprojectApplication {
 			userRepo.save(user9);
 			userRepo.save(user10);
 			userRepo.save(user11);
-			userRepo.save(user12);*/
-			
+			userRepo.save(user12);
+			*/
 			System.out.println("in command line runner");
 			log.info("fetch all members");
 			for (Member member : memberRepo.findAll()) {
